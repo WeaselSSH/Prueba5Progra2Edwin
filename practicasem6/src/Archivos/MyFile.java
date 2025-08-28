@@ -82,7 +82,7 @@ public class MyFile {
 
         long lengthArchivos = 0;
 
-        System.out.println("  Ultima Modificación      Tipo          Tamaño                 Nombre");
+        System.out.println("  Ultima Modificación     Tipo             Tamaño                  Nombre");
         
         for (File child : file.listFiles()) {
             if (!child.isHidden()) {
@@ -90,7 +90,7 @@ public class MyFile {
                 
                 System.out.print("  " + fechaModif + "     ");
                 System.out.print(((child.isDirectory()) ? "<DIR>" : "FILE ") + "            ");
-                System.out.print(child.length() + "                    ");
+                System.out.print(child.length() + " KB" + "                    ");
                 System.out.print(child.getName() + "\n");
 
                 if (child.isDirectory()) {
