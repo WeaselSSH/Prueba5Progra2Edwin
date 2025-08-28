@@ -3,6 +3,7 @@ package Archivos;
 import java.io.File; //clase utilitaria de archivos
 import java.io.IOException; //Excepción de archivos
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class MyFile {
 
@@ -15,11 +16,11 @@ public class MyFile {
     public void getInfo() {
         if (file.exists()) {
             System.out.println("Sí existe.");
-            System.out.println("\n Nombre: " + file.getName());
-            System.out.println("\n Path: " + file.getPath());
-            System.out.println("\n Absolute path: " + file.getAbsolutePath());
-            System.out.println("\n Padre: " + file.getAbsoluteFile().getParentFile().getParent());
-            System.out.println("\n Bytes: " + file.length());
+            System.out.println("Nombre: " + file.getName());
+            System.out.println("Path: " + file.getPath());
+            System.out.println("Absolute path: " + file.getAbsolutePath());
+            System.out.println("Padre: " + file.getAbsoluteFile().getParentFile().getParent());
+            System.out.println("Bytes: " + file.length());
             if (file.isFile()) {
                 System.out.println("es un archivo.");
             } else if (file.isDirectory()) {
@@ -70,8 +71,50 @@ public class MyFile {
             }
         }
     }
-    
+
     public void tree() {
         tree(file, "--");
+    }
+
+    private void mostrarDir(File file) {
+        int cantArchivos = 0;
+        int cantDir = 0;
+
+        long lengthArchivos = 0;
+
+        System.out.println("  Ultima Modificación      Tipo          Tamaño                 Nombre");
+        
+        for (File child : file.listFiles()) {
+            if (!child.isHidden()) {
+                String fechaModif = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(child.lastModified()));
+                
+                System.out.print("  " + fechaModif + "     ");
+                System.out.print(((child.isDirectory()) ? "<DIR>" : "FILE ") + "            ");
+                System.out.print(child.length() + "                    ");
+                System.out.print(child.getName() + "\n");
+
+                if (child.isDirectory()) {
+                    cantDir++;
+                } else {
+                    cantArchivos++;
+                    lengthArchivos += child.length();
+                }
+            }
+        }
+        System.out.println("\n" + cantArchivos + " Archivo(s) " + lengthArchivos + " KB");
+        System.out.println(cantDir + " Directorio(s) ");
+    }
+
+    public void mostrarDir() {
+        if (file.exists()) {
+            if (file.isDirectory()) {
+                System.out.println("\nDirectorio de: " + file.getAbsolutePath() + "\n");
+                mostrarDir(file);
+            } else {
+                System.out.println("\nNo es un directorio.");
+            }
+        } else {
+            System.out.println("\nDirectorio no existe.");
+        }
     }
 }

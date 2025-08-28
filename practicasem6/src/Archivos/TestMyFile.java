@@ -14,13 +14,14 @@ public class TestMyFile {
 
         do {
             System.out.println("\nMenu");
-            System.out.println("\n1- Set el archivo/folder");
-            System.out.println("\n2- Ver el archivo/folder");
-            System.out.println("\n3- Crear archivo");
-            System.out.println("\n4- Crear folder");
-            System.out.println("\n5- Eliminar folder/archivo");
-            System.out.println("\n6- Tree");
-            System.out.println("\n7- Salir");
+            System.out.println("1- Set el archivo/folder");
+            System.out.println("2- Ver el archivo/folder");
+            System.out.println("3- Crear archivo");
+            System.out.println("4- Crear folder");
+            System.out.println("5- Eliminar folder/archivo");
+            System.out.println("6- Tree");
+            System.out.println("7- Mostrar directorio");
+            System.out.println("8- Salir \n");
             System.out.println("Elija una opción: ");
             try {
                 option = scanner.nextInt();
@@ -46,6 +47,8 @@ public class TestMyFile {
                     case 6:
                         mf.tree();
                         break;
+                    case 7:
+                        mf.mostrarDir();
                 }
             } catch (InputMismatchException e) {
                 scanner.nextLine();
@@ -56,7 +59,7 @@ public class TestMyFile {
             } catch (IOException e) {
                 System.out.println("Error en disco.");
             }
-        } while (option != 7);
+        } while (option != 8);
     }
 
     private static void set() {
